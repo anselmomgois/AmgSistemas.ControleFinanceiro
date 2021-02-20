@@ -1,0 +1,2 @@
+# AmgSistemas.ControleFinanceiro
+Controle Financeiro
