@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="aca8427684da435d8a9b683ae21bf6b4" Name="Diagram1">
+        <EntityTypeShape EntityType="IGERENCEModel.AGCF_INTEGRANTES" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IGERENCEModel.AGCF_USUARIO" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="IGERENCEModel.FK_AGCF_INT_REFERENCE_AGCF_USU" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="IGERENCEModel.AGCF_FONTES" Width="1.5" PointX="3" PointY="4.25" />
+        <AssociationConnector Association="IGERENCEModel.FK_AGCF_FON_REFERENCE_AGCF_USU" />
+        <EntityTypeShape EntityType="IGERENCEModel.AGCF_TIPOREGISTRO" Width="1.5" PointX="3" PointY="7.375" />
+        <AssociationConnector Association="IGERENCEModel.FK_AGCF_TIP_REFERENCE_AGCF_USU" />
+        <EntityTypeShape EntityType="IGERENCEModel.AGCF_REGISTRO" Width="1.5" PointX="5.25" PointY="3.5" />
+        <AssociationConnector Association="IGERENCEModel.FK_AGCF_REG_REFERENCE_AGCF_FON" />
+        <AssociationConnector Association="IGERENCEModel.FK_AGCF_REG_REFERENCE_AGCF_INT" />
+        <AssociationConnector Association="IGERENCEModel.FK_AGCF_REG_REFERENCE_AGCF_TIP" />
+        <AssociationConnector Association="IGERENCEModel.FK_AGCF_REG_REFERENCE_AGCF_USU" />
+        <AssociationConnector Association="IGERENCEModel.FK_AGCF_REG_REFERENCE_AGCF_REG" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

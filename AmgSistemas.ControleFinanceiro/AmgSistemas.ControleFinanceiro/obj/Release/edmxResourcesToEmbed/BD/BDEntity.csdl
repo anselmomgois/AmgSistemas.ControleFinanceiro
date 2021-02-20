@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="IGERENCEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AGCF_INTEGRANTES">
+    <Key>
+      <PropertyRef Name="IDINTEGRANTE" />
+    </Key>
+    <Property Name="IDINTEGRANTE" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IDUSUARIO" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Name="DESNOME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="AGCF_USUARIO" Relationship="Self.FK_AGCF_INT_REFERENCE_AGCF_USU" FromRole="AGCF_INTEGRANTES" ToRole="AGCF_USUARIO" />
+    <NavigationProperty Name="AGCF_REGISTRO" Relationship="IGERENCEModel.FK_AGCF_REG_REFERENCE_AGCF_INT" FromRole="AGCF_INTEGRANTES" ToRole="AGCF_REGISTRO" />
+    <Property Name="BOLEXTERNO" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="AGCF_USUARIO">
+    <Key>
+      <PropertyRef Name="IDUSUARIO" />
+    </Key>
+    <Property Name="IDUSUARIO" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DESNOME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DESLOGIN" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DESSENHA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DESEMAIL" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="DESTELEFONE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="AGCF_INTEGRANTES" Relationship="Self.FK_AGCF_INT_REFERENCE_AGCF_USU" FromRole="AGCF_USUARIO" ToRole="AGCF_INTEGRANTES" />
+    <NavigationProperty Name="AGCF_FONTES" Relationship="IGERENCEModel.FK_AGCF_FON_REFERENCE_AGCF_USU" FromRole="AGCF_USUARIO" ToRole="AGCF_FONTES" />
+    <NavigationProperty Name="AGCF_TIPOREGISTRO" Relationship="IGERENCEModel.FK_AGCF_TIP_REFERENCE_AGCF_USU" FromRole="AGCF_USUARIO" ToRole="AGCF_TIPOREGISTRO" />
+    <NavigationProperty Name="AGCF_REGISTRO" Relationship="IGERENCEModel.FK_AGCF_REG_REFERENCE_AGCF_USU" FromRole="AGCF_USUARIO" ToRole="AGCF_REGISTRO" />
+  </EntityType>
+  <Association Name="FK_AGCF_INT_REFERENCE_AGCF_USU">
+    <End Role="AGCF_USUARIO" Type="Self.AGCF_USUARIO" Multiplicity="0..1" />
+    <End Role="AGCF_INTEGRANTES" Type="Self.AGCF_INTEGRANTES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AGCF_USUARIO">
+        <PropertyRef Name="IDUSUARIO" />
+      </Principal>
+      <Dependent Role="AGCF_INTEGRANTES">
+        <PropertyRef Name="IDUSUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="IGERENCEEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AGCF_INTEGRANTES" EntityType="Self.AGCF_INTEGRANTES" />
+    <EntitySet Name="AGCF_USUARIO" EntityType="Self.AGCF_USUARIO" />
+    <AssociationSet Name="FK_AGCF_INT_REFERENCE_AGCF_USU" Association="Self.FK_AGCF_INT_REFERENCE_AGCF_USU">
+      <End Role="AGCF_USUARIO" EntitySet="AGCF_USUARIO" />
+      <End Role="AGCF_INTEGRANTES" EntitySet="AGCF_INTEGRANTES" />
+    </AssociationSet>
+    <EntitySet Name="AGCF_FONTES" EntityType="IGERENCEModel.AGCF_FONTES" />
+    <AssociationSet Name="FK_AGCF_FON_REFERENCE_AGCF_USU" Association="IGERENCEModel.FK_AGCF_FON_REFERENCE_AGCF_USU">
+      <End Role="AGCF_USUARIO" EntitySet="AGCF_USUARIO" />
+      <End Role="AGCF_FONTES" EntitySet="AGCF_FONTES" />
+    </AssociationSet>
+    <EntitySet Name="AGCF_TIPOREGISTRO" EntityType="IGERENCEModel.AGCF_TIPOREGISTRO" />
+    <AssociationSet Name="FK_AGCF_TIP_REFERENCE_AGCF_USU" Association="IGERENCEModel.FK_AGCF_TIP_REFERENCE_AGCF_USU">
+      <End Role="AGCF_USUARIO" EntitySet="AGCF_USUARIO" />
+      <End Role="AGCF_TIPOREGISTRO" EntitySet="AGCF_TIPOREGISTRO" />
+    </AssociationSet>
+    <EntitySet Name="AGCF_REGISTRO" EntityType="IGERENCEModel.AGCF_REGISTRO" />
+    <AssociationSet Name="FK_AGCF_REG_REFERENCE_AGCF_FON" Association="IGERENCEModel.FK_AGCF_REG_REFERENCE_AGCF_FON">
+      <End Role="AGCF_FONTES" EntitySet="AGCF_FONTES" />
+      <End Role="AGCF_REGISTRO" EntitySet="AGCF_REGISTRO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AGCF_REG_REFERENCE_AGCF_INT" Association="IGERENCEModel.FK_AGCF_REG_REFERENCE_AGCF_INT">
+      <End Role="AGCF_INTEGRANTES" EntitySet="AGCF_INTEGRANTES" />
+      <End Role="AGCF_REGISTRO" EntitySet="AGCF_REGISTRO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AGCF_REG_REFERENCE_AGCF_TIP" Association="IGERENCEModel.FK_AGCF_REG_REFERENCE_AGCF_TIP">
+      <End Role="AGCF_TIPOREGISTRO" EntitySet="AGCF_TIPOREGISTRO" />
+      <End Role="AGCF_REGISTRO" EntitySet="AGCF_REGISTRO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AGCF_REG_REFERENCE_AGCF_USU" Association="IGERENCEModel.FK_AGCF_REG_REFERENCE_AGCF_USU">
+      <End Role="AGCF_USUARIO" EntitySet="AGCF_USUARIO" />
+      <End Role="AGCF_REGISTRO" EntitySet="AGCF_REGISTRO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AGCF_REG_REFERENCE_AGCF_REG" Association="IGERENCEModel.FK_AGCF_REG_REFERENCE_AGCF_REG">
+      <End Role="AGCF_REGISTRO" EntitySet="AGCF_REGISTRO" />
+      <End Role="AGCF_REGISTRO1" EntitySet="AGCF_REGISTRO" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AGCF_FONTES">
+    <Key>
+      <PropertyRef Name="IDFONTES" />
+    </Key>
+    <Property Name="IDFONTES" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Name="IDUSUARIO" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Name="CODTIPOFONTE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DESNOME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="NELDIAFECHAMENTO" Type="Int32" />
+    <NavigationProperty Name="AGCF_USUARIO" Relationship="IGERENCEModel.FK_AGCF_FON_REFERENCE_AGCF_USU" FromRole="AGCF_FONTES" ToRole="AGCF_USUARIO" />
+    <NavigationProperty Name="AGCF_REGISTRO" Relationship="IGERENCEModel.FK_AGCF_REG_REFERENCE_AGCF_FON" FromRole="AGCF_FONTES" ToRole="AGCF_REGISTRO" />
+    <Property Name="BOLCARTAOCREDITO" Type="Boolean" />
+    <Property Name="CODFONTE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_AGCF_FON_REFERENCE_AGCF_USU">
+    <End Type="IGERENCEModel.AGCF_USUARIO" Role="AGCF_USUARIO" Multiplicity="0..1" />
+    <End Type="IGERENCEModel.AGCF_FONTES" Role="AGCF_FONTES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AGCF_USUARIO">
+        <PropertyRef Name="IDUSUARIO" />
+      </Principal>
+      <Dependent Role="AGCF_FONTES">
+        <PropertyRef Name="IDUSUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="AGCF_TIPOREGISTRO">
+    <Key>
+      <PropertyRef Name="IDTIPOREGISTRO" />
+    </Key>
+    <Property Name="IDTIPOREGISTRO" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Name="IDUSUARIO" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Name="DESTIPOREGISTRO" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="CODTIPOREGISTRO" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="AGCF_USUARIO" Relationship="IGERENCEModel.FK_AGCF_TIP_REFERENCE_AGCF_USU" FromRole="AGCF_TIPOREGISTRO" ToRole="AGCF_USUARIO" />
+    <Property Name="CODCATEGORIAGERAL" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="BOLPARCELAMENTO" Type="Boolean" />
+    <NavigationProperty Name="AGCF_REGISTRO" Relationship="IGERENCEModel.FK_AGCF_REG_REFERENCE_AGCF_TIP" FromRole="AGCF_TIPOREGISTRO" ToRole="AGCF_REGISTRO" />
+    <Property Name="CODTIPOREGISTROORIGINAL" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="BOLSALARIO" Type="Boolean" />
+  </EntityType>
+  <Association Name="FK_AGCF_TIP_REFERENCE_AGCF_USU">
+    <End Type="IGERENCEModel.AGCF_USUARIO" Role="AGCF_USUARIO" Multiplicity="0..1" />
+    <End Type="IGERENCEModel.AGCF_TIPOREGISTRO" Role="AGCF_TIPOREGISTRO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AGCF_USUARIO">
+        <PropertyRef Name="IDUSUARIO" />
+      </Principal>
+      <Dependent Role="AGCF_TIPOREGISTRO">
+        <PropertyRef Name="IDUSUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="AGCF_REGISTRO">
+    <Key>
+      <PropertyRef Name="IDREGISTRO" />
+    </Key>
+    <Property Name="IDREGISTRO" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Name="IDUSUARIO" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Name="IDFONTES" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Name="IDTIPOREGISTRO" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Name="IDINTEGRANTE" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Name="DESREGISTRO" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="OBSDETALHES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="BOLQUITADO" Type="Boolean" Nullable="false" />
+    <Property Name="NELPARCELA" Type="Int32" />
+    <Property Name="NELPARCELAFINAL" Type="Int32" />
+    <Property Name="DTHDATAREGISTRO" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="AGCF_FONTES" Relationship="IGERENCEModel.FK_AGCF_REG_REFERENCE_AGCF_FON" FromRole="AGCF_REGISTRO" ToRole="AGCF_FONTES" />
+    <NavigationProperty Name="AGCF_INTEGRANTES" Relationship="IGERENCEModel.FK_AGCF_REG_REFERENCE_AGCF_INT" FromRole="AGCF_REGISTRO" ToRole="AGCF_INTEGRANTES" />
+    <NavigationProperty Name="AGCF_TIPOREGISTRO" Relationship="IGERENCEModel.FK_AGCF_REG_REFERENCE_AGCF_TIP" FromRole="AGCF_REGISTRO" ToRole="AGCF_TIPOREGISTRO" />
+    <NavigationProperty Name="AGCF_USUARIO" Relationship="IGERENCEModel.FK_AGCF_REG_REFERENCE_AGCF_USU" FromRole="AGCF_REGISTRO" ToRole="AGCF_USUARIO" />
+    <Property Name="DTHCOMPRA" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="NUMVALOR" Type="Decimal" Nullable="false" Precision="8" Scale="2" />
+    <Property Name="IDREGISTROPAI" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="AGCF_REGISTRO1" Relationship="IGERENCEModel.FK_AGCF_REG_REFERENCE_AGCF_REG" FromRole="AGCF_REGISTRO" ToRole="AGCF_REGISTRO1" />
+    <NavigationProperty Name="AGCF_REGISTRO2" Relationship="IGERENCEModel.FK_AGCF_REG_REFERENCE_AGCF_REG" FromRole="AGCF_REGISTRO1" ToRole="AGCF_REGISTRO" />
+    <Property Name="CODMES" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CODANO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="BOLPAGO" Type="Boolean" />
+  </EntityType>
+  <Association Name="FK_AGCF_REG_REFERENCE_AGCF_FON">
+    <End Type="IGERENCEModel.AGCF_FONTES" Role="AGCF_FONTES" Multiplicity="0..1" />
+    <End Type="IGERENCEModel.AGCF_REGISTRO" Role="AGCF_REGISTRO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AGCF_FONTES">
+        <PropertyRef Name="IDFONTES" />
+      </Principal>
+      <Dependent Role="AGCF_REGISTRO">
+        <PropertyRef Name="IDFONTES" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AGCF_REG_REFERENCE_AGCF_INT">
+    <End Type="IGERENCEModel.AGCF_INTEGRANTES" Role="AGCF_INTEGRANTES" Multiplicity="0..1" />
+    <End Type="IGERENCEModel.AGCF_REGISTRO" Role="AGCF_REGISTRO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AGCF_INTEGRANTES">
+        <PropertyRef Name="IDINTEGRANTE" />
+      </Principal>
+      <Dependent Role="AGCF_REGISTRO">
+        <PropertyRef Name="IDINTEGRANTE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AGCF_REG_REFERENCE_AGCF_TIP">
+    <End Type="IGERENCEModel.AGCF_TIPOREGISTRO" Role="AGCF_TIPOREGISTRO" Multiplicity="0..1" />
+    <End Type="IGERENCEModel.AGCF_REGISTRO" Role="AGCF_REGISTRO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AGCF_TIPOREGISTRO">
+        <PropertyRef Name="IDTIPOREGISTRO" />
+      </Principal>
+      <Dependent Role="AGCF_REGISTRO">
+        <PropertyRef Name="IDTIPOREGISTRO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AGCF_REG_REFERENCE_AGCF_USU">
+    <End Type="IGERENCEModel.AGCF_USUARIO" Role="AGCF_USUARIO" Multiplicity="0..1" />
+    <End Type="IGERENCEModel.AGCF_REGISTRO" Role="AGCF_REGISTRO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AGCF_USUARIO">
+        <PropertyRef Name="IDUSUARIO" />
+      </Principal>
+      <Dependent Role="AGCF_REGISTRO">
+        <PropertyRef Name="IDUSUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AGCF_REG_REFERENCE_AGCF_REG">
+    <End Type="IGERENCEModel.AGCF_REGISTRO" Role="AGCF_REGISTRO" Multiplicity="0..1" />
+    <End Type="IGERENCEModel.AGCF_REGISTRO" Role="AGCF_REGISTRO1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AGCF_REGISTRO">
+        <PropertyRef Name="IDREGISTRO" />
+      </Principal>
+      <Dependent Role="AGCF_REGISTRO1">
+        <PropertyRef Name="IDREGISTROPAI" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

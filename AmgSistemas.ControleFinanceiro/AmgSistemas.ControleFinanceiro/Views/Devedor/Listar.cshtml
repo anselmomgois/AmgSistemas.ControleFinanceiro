@@ -1,0 +1,66 @@
+﻿@model IEnumerable<AmgSistemas.ControleFinanceiro.Models.Devedor>
+@{
+    ViewBag.Title = "Listar";
+    Layout = "~/Views/Shared/_LayoutGrid.cshtml";
+}
+
+<fieldset style="margin-top:15px">
+    <legend>Devedores</legend>
+
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2>Relatório <b>Devedores</b></h2>
+                </div>
+            </div>
+        </div>
+        <table id="objTabela" class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th style="width:75%">Nome</th>
+                    <th style="width:25%; text-align: center">Valor Emprestado</th>
+                    <th style="width:25%; text-align: center">Valor Pago</th>
+                    <th style="width:25%; text-align: center">Valor Remanescente</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @if (Model != null && Model.Count() > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="width:75%">@(item.NomeIntegrante)</td>
+                            <td style="width:25%; text-align: center; color:red"><b>@("R$ " + item.ValorTotalDivida.ToString("N2"))</b></td>
+                            <td style="width:25%; text-align: center; color:green"><b>@("R$ " + item.ValorTotalPagamento.ToString("N2"))</b></td>
+                            @if (item.ValorRemanecente > 0)
+                            {
+                                <td style="width:25%; text-align: center; color:red"><b>@("R$ " + item.ValorRemanecente.ToString("N2"))</b></td>
+                            }
+                            else
+                            {
+                                <td style="width:25%; text-align: center; color:green"><b>@("R$ " + item.ValorRemanecente.ToString("N2"))</b></td>
+                            }
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</fieldset>
+@section js
+{
+    <script>
+
+        $(document).ready(function () {
+            $('#objTabela').DataTable(
+                {
+                    "order": [0, 'asc']
+                });
+        });
+    </script>
+}
+
+
+

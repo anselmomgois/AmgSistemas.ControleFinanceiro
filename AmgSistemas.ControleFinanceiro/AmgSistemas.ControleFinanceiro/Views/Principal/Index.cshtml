@@ -1,0 +1,106 @@
+﻿@model AmgSistemas.ControleFinanceiro.Models.Principal
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutGrid.cshtml";
+}
+<fieldset style="margin-top:15px">
+    <legend>Relatorio Situação Mês</legend>
+
+
+    <div class="container">
+        @Html.Partial("Buscar", new AmgSistemas.ControleFinanceiro.Models.BuscaRegistros() { id = ViewBag.Tipo, Ano = DateTime.Now.Year, Mes = DateTime.Now.Month, BolBuscarQuitado= Model.BuscarQuitado })
+    </div>
+    <br />
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2>Relatório <b>Situação Geral Mês</b></h2>
+                </div>
+            </div>
+        </div>
+        <table id="objTabela" class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th style="width:0px; visibility: hidden; font-size: 0px"></th>
+                    <th style="width:15%">Categoria</th>
+                    <th style="width:25%; text-align: center">Valor Gasto</th>
+                    <th style="width:15%; text-align: center">Porcentagem Gasta</th>
+                    <th style="width:10%; text-align: center">Porcentagem Ideal</th>
+                    <th style="width:10%; text-align: center">Valor Ideal</th>
+                    <th style="width:15%; text-align: center">Diferença %</th>
+                    <th style="width:15%; text-align: center">Diferença R$</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Receita != null)
+                {
+                    <tr>
+                        <td style="width:0px; visibility: hidden; font-size: 0px">@(Model.Receita.Ordem)</td>
+                        <td style="width:14%">@(Model.Receita.DescricaoCategoriaGeral)</td>
+                        <td style="width:25%; color: green; text-align: center"><b>@("R$ " + Model.Receita.ValorGasto.ToString("N2")) </b></td>
+                        <td style="width:25%"></td>
+                        <td style="width:25%"></td>
+                        <td style="width:25%"></td>
+                        <td style="width:25%"></td>
+                        <td style="width:25%"></td>
+                    </tr>
+                }
+                @if (Model.SituacaoGeralMes != null && Model.SituacaoGeralMes.Count() > 0)
+                {
+                    foreach (var item in Model.SituacaoGeralMes)
+                    {
+                    <tr>
+                        <td style="width:0px; visibility: hidden; font-size: 0px">@(item.Ordem)</td>
+                        <td style="width:15%">@(item.DescricaoCategoriaGeral)</td>
+                        <td style="width:25%; text-align: center">@("R$ " + item.ValorGasto.ToString("N2"))</td>
+                        <td style="width:25%; text-align: center">@(item.PorcentagemGasta.ToString("N2") + "%")</td>
+                        <td style="width:25%; text-align: center; color:orange"><b>@(item.PorcentagemIdeal.ToString("N2") + "%")</b></td>
+                        <td style="width:25%; text-align: center; color:orange"><b>@("R$ " + item.ValorIdeal.ToString("N2"))</b></td>
+                        @if (item.ValorDiferenca > 0)
+                        {
+                            <td style="width:25%; text-align: center; color:green"><b>@(item.PorcentagemDiferenca.ToString("N2") + "%")</b></td>
+                            <td style="width:25%; text-align: center; color:green"><b>@("R$ " + item.ValorDiferenca.ToString("N2"))</b></td>
+                        }
+                        else
+                        {
+                            <td style="width:25%; text-align: center; color:red"><b>@(item.PorcentagemDiferenca.ToString("N2") + "%")</b></td>
+                            <td style="width:25%; text-align: center; color:red"><b>@("R$ " + item.ValorDiferenca.ToString("N2"))</b></td>
+                        }
+                    </tr>
+                    }
+                }
+                        <tr>
+                            <td style="width:0px; visibility: hidden; font-size: 0px">@(Model.SequenciaTotal)</td>
+                            <td style="width:15%">Saldo</td>
+                            @if (Model.Saldo > 0)
+                            {
+                                <td style="width:25%; color: green; text-align: center"><b>@("R$ " + Model.Saldo.ToString("N2"))</b></td>
+                            }
+                            else
+                            {
+                                <td style="width:25%; color: red; text-align: center"><b>@("R$ " + Model.Saldo.ToString("N2"))</b></td>
+                            }
+                            <td style="width:25%"></td>
+                            <td style="width:25%"></td>
+                            <td style="width:25%"></td>
+                            <td style="width:25%"></td>
+                            <td style="width:25%"></td>
+                        </tr>
+            </tbody>
+        </table>
+    </div>
+</fieldset>
+@section js
+{
+    <script>
+
+        $(document).ready(function () {
+            $('#objTabela').DataTable(
+                {
+                    "order": [0, 'asc']
+                });
+        });
+    </script>
+}
+

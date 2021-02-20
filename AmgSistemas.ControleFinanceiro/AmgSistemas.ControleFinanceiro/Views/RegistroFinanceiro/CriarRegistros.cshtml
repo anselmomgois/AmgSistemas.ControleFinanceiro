@@ -1,0 +1,35 @@
+﻿
+@{
+    /**/
+
+    ViewBag.Title = "CriarRegistros";
+    Layout = "~/Views/Shared/_LayoutGrid.cshtml";
+}
+
+@using (Html.BeginForm("GravarRegistros", "RegistroFinanceiro", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <fieldset style="margin-top:15px">
+        <legend>Importar Excel</legend>
+        @Html.ValidationSummary(true)
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2>Importar <b>Excel</b></h2>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="form-group">
+                <i class="glyphicon glyphicon-plus"></i>
+                <span>Importar Excel</span>
+                <input id="fileupload" type="file" name="files[]" multiple>
+            </div>
+            <br />
+            <button class="btn btn-success" type="submit" name="ImportarExcel" value="ImportarExcel">Importar Excel</button>
+
+
+        </div>
+    </fieldset>
+}
+

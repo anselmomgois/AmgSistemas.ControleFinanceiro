@@ -1,0 +1,122 @@
+﻿@model IEnumerable<AmgSistemas.ControleFinanceiro.Models.DevedorDetalhe>
+@{
+    ViewBag.Title = "Listar";
+    Layout = "~/Views/Shared/_LayoutGrid.cshtml";
+}
+
+<div class="table-wrapper">
+    <div class="table-title">
+        <div class="row">
+            <div class="col-sm-6">
+                <h2>Relatório <b>Devedores Detalhe</b></h2>
+            </div>
+        </div>
+    </div>
+
+    @if (Model != null && Model.Count() > 0)
+    {
+        foreach (var item in Model)
+        {
+            <fieldset style="margin-top:15px">
+                <legend>@(item.NomeIntegrante)</legend>
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-6">
+                            <fieldset style="margin-top:15px">
+                                <legend>Items Gastos</legend>
+
+
+                                <table id="objTabelaDespesa" class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:50%;">Descrição</th>
+                                            <th style="width:30%;">Observação</th>
+                                            <th style="width:10%; text-align: center">Data</th>
+                                            <th style="width:10%; text-align: center">Valor</th>
+                                        </tr>
+                                    </thead>
+
+                                    @if (item.ItemsGastos != null && item.ItemsGastos.Count > 0)
+                                    {
+                                        <tbody>
+                                            @foreach (var ip in item.ItemsGastos)
+                                            {
+                                                <tr>
+                                                    <td style="width:50%;">@(ip.Descricao)</td>
+                                                    <td style="width:30%;">@(ip.Observacao)</td>
+                                                    <td style="width:10%; text-align: center;">@(ip.Data)</td>
+                                                    <td style="width:10%; text-align: center; color:red"><b>@("R$ " + ip.Valor.ToString("N2"))</b></td>
+
+                                                </tr>
+                                            }
+
+
+                                        </tbody>
+                                    }
+                                </table>
+
+
+                            </fieldset>
+                        </div>
+                        <div class="col-6">
+                            <fieldset style="margin-top:15px">
+                                <legend>Items pagos</legend>
+
+
+                                <table id="objTabelaPagamento" class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:50%;">Descrição</th>
+                                            <th style="width:30%;">Observação</th>
+                                            <th style="width:10%; text-align: center">Data</th>
+                                            <th style="width:10%; text-align: center">Valor</th>
+                                        </tr>
+                                    </thead>
+
+                                    @if (item.PagamentosEfetuados != null && item.PagamentosEfetuados.Count > 0)
+                                    {
+                                        <tbody>
+                                            @foreach (var ip in item.PagamentosEfetuados)
+                                            {
+                                                <tr>
+                                                    <td style="width:50%;">@(ip.Descricao)</td>
+                                                    <td style="width:30%;">@(ip.Observacao)</td>
+                                                    <td style="width:10%; text-align: center;">@(ip.Data)</td>
+                                                    <td style="width:10%; text-align: center; color:green"><b>@("R$ " + ip.Valor.ToString("N2"))</b></td>
+
+                                                </tr>
+                                            }
+
+
+                                        </tbody>
+                                    }
+                                </table>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+        }
+    }
+
+
+</div>
+@section js
+{
+    <script>
+
+        $(document).ready(function () {
+            $('#objTabelaPagamento').DataTable(
+                {
+                    "order": [0, 'asc']
+                });
+
+            $('#objTabelaDespesa').DataTable(
+                {
+                    "order": [0, 'asc']
+                });
+        });
+    </script>
+}

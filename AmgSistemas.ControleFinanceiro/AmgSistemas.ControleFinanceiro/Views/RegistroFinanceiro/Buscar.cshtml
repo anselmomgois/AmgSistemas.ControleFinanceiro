@@ -1,0 +1,25 @@
+﻿@model  AmgSistemas.ControleFinanceiro.Models.BuscaRegistros
+@using (Html.BeginForm("Buscar", "RegistroFinanceiro", FormMethod.Post, Model))
+{
+    @Html.HiddenFor(model => model.id)
+    <div class="row">
+        <div class="col-5">
+            <div class="form-group">
+                <label>Ano</label>
+                @Html.DropDownListFor(model => model.Ano, (IEnumerable<SelectListItem>)(AmgSistemas.ControleFinanceiro.Classes.Parametros.Anos), new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="form-group">
+                <label>Mês</label>
+                @Html.DropDownListFor(model => model.Mes, (IEnumerable<SelectListItem>)(AmgSistemas.ControleFinanceiro.Classes.Parametros.Meses), new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="form-group">
+                <br />
+                <input type="submit" style="margin-top:10px; width:100%" class="btn btn-primary" value="Buscar">
+            </div>
+        </div>
+    </div>
+}

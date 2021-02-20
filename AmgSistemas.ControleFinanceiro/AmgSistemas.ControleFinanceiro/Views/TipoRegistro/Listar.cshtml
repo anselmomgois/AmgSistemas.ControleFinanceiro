@@ -1,0 +1,134 @@
+﻿@model IEnumerable<AmgSistemas.ControleFinanceiro.Models.TipoRegistro>
+@using AmgSistemas.ControleFinanceiro.Extensoes
+@{
+    ViewBag.Title = "Listar";
+    Layout = "~/Views/Shared/_LayoutGrid.cshtml";
+}
+<fieldset style="margin-top:15px">
+    <legend>Categoria</legend>
+
+
+    <div class="container">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2>Gerenciar <b>Categoria</b></h2>
+                    </div>
+                    <div class="col-sm-6">
+                        <a id="btnCriar" onclick="ExecutarCriar()" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Adicionar Novo Tipo</span></a>
+                    </div>
+                </div>
+            </div>
+            <table id="objTabela" class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th style="width:10%">Código</th>
+                        <th style="width:45%">Nome</th>
+                        <th style="width:20%">Categoria Geral</th>
+                        <th style="width:15%; text-align: center">Tipo Registro</th>
+                        <th style="width:10%">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td style="width:10%">@(item.Codigo)</td>
+                        <td style="width:45%">@(item.Nome)</td>
+                        <td style="width:20%">
+                            @(item.CodigoCategoriaGeral == AmgSistemas.ControleFinanceiro.Enumeradores.CategoriaGeral.DESPESAESSENCIAL.RecuperarValor() ? "Despesa Essencial" :
+                                            item.CodigoCategoriaGeral == AmgSistemas.ControleFinanceiro.Enumeradores.CategoriaGeral.DESPESANAOESSENCIAL.RecuperarValor() ? "Despesa Não Essencial" :
+                                            item.CodigoCategoriaGeral == AmgSistemas.ControleFinanceiro.Enumeradores.CategoriaGeral.DIVIDA.RecuperarValor() ? "Divída" :
+                                            item.CodigoCategoriaGeral == AmgSistemas.ControleFinanceiro.Enumeradores.CategoriaGeral.LAZER.RecuperarValor() ? "Lazer" : "Investimento" )
+                        </td>
+                        <td style="width:15%; text-align: center">
+                            @(item.TipoValor == AmgSistemas.ControleFinanceiro.Enumeradores.TipoFonte.CREDITO.RecuperarValor() ? "Credito" :
+                                                       item.TipoValor == AmgSistemas.ControleFinanceiro.Enumeradores.TipoFonte.DEBITO.RecuperarValor() ? "Debito" : "Investimento" )
+                        </td>
+                        <td style="width:10%">
+                            <a id="btnEditar" class="edit" onclick="ExecutarEditar(@("'" + item.Identificador + "'"))" style="cursor:pointer" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                            <a id="btnExcluir" onclick="ExecutarExcluir(@("'" + item.Identificador + "'"))" style="cursor:pointer" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Edit Modal HTML -->
+    <div id="addModal" class="modal fade">
+
+    </div>
+</fieldset>
+
+@section js
+{
+    <script>
+
+        $(document).ready(function () {
+            $('#objTabela').DataTable(
+                {
+                    "order": [0, 'asc']
+                });
+        });
+
+        function ExecutarCriar() {
+
+            $("#addModal").load("Criar", function () {
+                $("#addModal").modal();
+            })
+        }
+
+        function ExecutarEditar(id) {
+
+            $("#addModal").load("Editar?id=" + id, function () {
+                $("#addModal").modal();
+            });
+        }
+
+        function ExecutarExcluir(id) {
+
+            $("#addModal").load("Excluir?id=" + id, function () {
+                $("#addModal").modal();
+            });
+        }
+
+        function RecuperarValor() {
+
+            var idTipoValor;
+
+            $("#TipoValor option:selected").each(function () {
+                idTipoValor = $(this).val();
+            });
+
+            if (idTipoValor != null) {
+
+                if (idTipoValor == 'IV') {
+                    $("#CodigoCategoriaGeral").each(function () {
+                        $("#CodigoCategoriaGeral option[value='DEE']").remove()
+                        $("#CodigoCategoriaGeral option[value='DNE']").remove()
+                        $("#CodigoCategoriaGeral option[value='DIV']").remove()
+                        $("#CodigoCategoriaGeral option[value='LAZ']").remove()
+                        $(this).append(new Option('Investimento', 'INV'));
+                        $(this).val('INV');
+                        //$(this).attr('disabled', true);
+                        
+                    });
+                }
+                else {
+                    $("#CodigoCategoriaGeral option[value='INV']").remove()
+                    $("#CodigoCategoriaGeral").each(function () {
+                        $(this).attr('disabled', false);
+                        $(this).append(new Option('Despesa Essencial', 'DEE'));
+                        $(this).append(new Option('Despesa Não Essencial', 'DNE'));
+                        $(this).append(new Option('Divida', 'DIV'));
+                        $(this).append(new Option('Lazer', 'LAZ'));
+                    });
+                }
+            }
+        }
+
+    </script>
+}
+

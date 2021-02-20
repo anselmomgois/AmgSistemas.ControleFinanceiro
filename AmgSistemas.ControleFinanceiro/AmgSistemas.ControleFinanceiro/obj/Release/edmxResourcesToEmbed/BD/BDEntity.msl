@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="IGERENCEModelStoreContainer" CdmEntityContainer="IGERENCEEntities">
+    <EntitySetMapping Name="AGCF_INTEGRANTES">
+      <EntityTypeMapping TypeName="IGERENCEModel.AGCF_INTEGRANTES">
+        <MappingFragment StoreEntitySet="AGCF_INTEGRANTES">
+          <ScalarProperty Name="BOLEXTERNO" ColumnName="BOLEXTERNO" />
+          <ScalarProperty Name="IDINTEGRANTE" ColumnName="IDINTEGRANTE" />
+          <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
+          <ScalarProperty Name="DESNOME" ColumnName="DESNOME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AGCF_USUARIO">
+      <EntityTypeMapping TypeName="IGERENCEModel.AGCF_USUARIO">
+        <MappingFragment StoreEntitySet="AGCF_USUARIO">
+          <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
+          <ScalarProperty Name="DESNOME" ColumnName="DESNOME" />
+          <ScalarProperty Name="DESLOGIN" ColumnName="DESLOGIN" />
+          <ScalarProperty Name="DESSENHA" ColumnName="DESSENHA" />
+          <ScalarProperty Name="DESEMAIL" ColumnName="DESEMAIL" />
+          <ScalarProperty Name="DESTELEFONE" ColumnName="DESTELEFONE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AGCF_FONTES">
+      <EntityTypeMapping TypeName="IGERENCEModel.AGCF_FONTES">
+        <MappingFragment StoreEntitySet="AGCF_FONTES">
+          <ScalarProperty Name="CODFONTE" ColumnName="CODFONTE" />
+          <ScalarProperty Name="BOLCARTAOCREDITO" ColumnName="BOLCARTAOCREDITO" />
+          <ScalarProperty Name="NELDIAFECHAMENTO" ColumnName="NELDIAFECHAMENTO" />
+          <ScalarProperty Name="DESNOME" ColumnName="DESNOME" />
+          <ScalarProperty Name="CODTIPOFONTE" ColumnName="CODTIPOFONTE" />
+          <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
+          <ScalarProperty Name="IDFONTES" ColumnName="IDFONTES" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AGCF_TIPOREGISTRO">
+      <EntityTypeMapping TypeName="IGERENCEModel.AGCF_TIPOREGISTRO">
+        <MappingFragment StoreEntitySet="AGCF_TIPOREGISTRO">
+          <ScalarProperty Name="BOLSALARIO" ColumnName="BOLSALARIO" />
+          <ScalarProperty Name="CODTIPOREGISTROORIGINAL" ColumnName="CODTIPOREGISTROORIGINAL" />
+          <ScalarProperty Name="BOLPARCELAMENTO" ColumnName="BOLPARCELAMENTO" />
+          <ScalarProperty Name="CODCATEGORIAGERAL" ColumnName="CODCATEGORIAGERAL" />
+          <ScalarProperty Name="CODTIPOREGISTRO" ColumnName="CODTIPOREGISTRO" />
+          <ScalarProperty Name="DESTIPOREGISTRO" ColumnName="DESTIPOREGISTRO" />
+          <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
+          <ScalarProperty Name="IDTIPOREGISTRO" ColumnName="IDTIPOREGISTRO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AGCF_REGISTRO">
+      <EntityTypeMapping TypeName="IGERENCEModel.AGCF_REGISTRO">
+        <MappingFragment StoreEntitySet="AGCF_REGISTRO">
+          <ScalarProperty Name="BOLPAGO" ColumnName="BOLPAGO" />
+          <ScalarProperty Name="CODANO" ColumnName="CODANO" />
+          <ScalarProperty Name="CODMES" ColumnName="CODMES" />
+          <ScalarProperty Name="IDREGISTROPAI" ColumnName="IDREGISTROPAI" />
+          <ScalarProperty Name="NUMVALOR" ColumnName="NUMVALOR" />
+          <ScalarProperty Name="DTHCOMPRA" ColumnName="DTHCOMPRA" />
+          <ScalarProperty Name="DTHDATAREGISTRO" ColumnName="DTHDATAREGISTRO" />
+          <ScalarProperty Name="NELPARCELAFINAL" ColumnName="NELPARCELAFINAL" />
+          <ScalarProperty Name="NELPARCELA" ColumnName="NELPARCELA" />
+          <ScalarProperty Name="BOLQUITADO" ColumnName="BOLQUITADO" />
+          <ScalarProperty Name="OBSDETALHES" ColumnName="OBSDETALHES" />
+          <ScalarProperty Name="DESREGISTRO" ColumnName="DESREGISTRO" />
+          <ScalarProperty Name="IDINTEGRANTE" ColumnName="IDINTEGRANTE" />
+          <ScalarProperty Name="IDTIPOREGISTRO" ColumnName="IDTIPOREGISTRO" />
+          <ScalarProperty Name="IDFONTES" ColumnName="IDFONTES" />
+          <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
+          <ScalarProperty Name="IDREGISTRO" ColumnName="IDREGISTRO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

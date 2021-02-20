@@ -1,0 +1,43 @@
+﻿@model AmgSistemas.ControleFinanceiro.Models.Fonte
+
+@{
+    Layout = null;
+}
+@using (Html.BeginForm("Editar", "Fonte", FormMethod.Post, Model))
+{
+    @Html.HiddenFor(model => model.Identificador)
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Atualizar Fonte</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Código</label>
+                    @Html.EditorFor(model => model.Codigo, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="form-group">
+                    <label>Nome</label>
+                    @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="form-group">
+                    <label>Tipo Fonte</label>
+                    @Html.DropDownListFor(model => model.TipoValor, (IEnumerable<SelectListItem>)(ViewBag.Categorias), new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label>Dia Fechamento</label>
+                    @Html.EditorFor(model => model.DiaFechamento, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="form-group">
+                    <label>Cartão de Credito</label>
+                    @Html.CheckBoxFor(model => model.CartaoCredito, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+                <input type="submit" class="btn btn-success" value="Atualizar">
+            </div>
+        </div>
+    </div>
+}

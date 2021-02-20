@@ -1,0 +1,25 @@
+﻿@model AmgSistemas.ControleFinanceiro.Models.Fonte
+@{
+    Layout = null;
+}
+@using (Html.BeginForm("Excluir", "Fonte", FormMethod.Post, Model))
+{
+    @Html.HiddenFor(model => model.Identificador)
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Excluir Fonte</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Deseja excluir a fonte?</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+                <input type="submit" class="btn btn-success" value="Excluir">
+            </div>
+        </div>
+    </div>
+}

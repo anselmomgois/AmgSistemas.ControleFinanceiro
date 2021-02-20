@@ -1,0 +1,164 @@
+﻿@model AmgSistemas.ControleFinanceiro.Models.UsuarioCadastro
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="@Url.Content("~/cssCadastro/vendor/bootstrap/css/bootstrap.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/cssCadastro/fonts/font-awesome-4.7.0/css/font-awesome.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/cssCadastro/fonts/Linearicons-Free-v1.0.0/icon-font.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/cssCadastro/fonts/iconic/css/material-design-iconic-font.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/cssCadastro/vendor/animate/animate.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/cssCadastro/vendor/css-hamburgers/hamburgers.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/cssCadastro/vendor/animsition/css/animsition.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/cssCadastro/vendor/select2/select2.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/cssCadastro/vendor/daterangepicker/daterangepicker.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/cssCadastro/css/util.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/cssCadastro/css/main.css")" rel="stylesheet" />
+</head>
+<body>
+    <div class="limiter">
+
+        <div class="container-login100">
+            <div class="login100-more" style="background-image: url('images/bg-01.jpg');"></div>
+
+            <div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
+                @using (Html.BeginForm("Cadastrar", "UsuarioCadastro", FormMethod.Post, Model))
+                {
+                    <div id="objToastd" class="toast" role="alert" aria-live="assertive" aria-atomic="true" hidden>
+                        <div class="toast-header">
+                            <img src="..." class="rounded mr-2" alt="...">
+                            <strong class="mr-auto">Bootstrap</strong>
+                            <small>11 mins ago</small>
+                            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="toast-body">
+                            Hello, world! This is a toast message.
+                        </div>
+                    </div>
+
+                    @*<div class="container">
+                            <div class="col-md-6 col-md-offset-3">
+                                <p>Caso não tenha notado, <a href="javascript:void(0);" id="aShowMessage">clique aqui</a> para que a mensagem seja exibida novamente.
+                            </div>
+                        </div>*@
+                    <div class="container">
+                        <div class="col-md-6 col-md-offset-3">
+                            @Html.ValidationSummary(true)<br />
+                            @Html.ValidationMessage("UsuarioCadastro")
+                        </div>
+                    </div>
+
+                    <span class="login100-form-title p-b-59">
+                        Cadastrar Nova Conta
+                    </span>
+
+                    <div class="wrap-input100 validate-input" data-validate="Nome é obrigatório">
+                        <span class="label-input100">Nome Completo</span>
+                        @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "input100", @placeholder = "Nome..." } })
+                        <span class="focus-input100"> @Html.ValidationMessageFor(model => model.Nome)</span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Email valido requerido: ex@abc.xyz">
+                        <span class="label-input100">Email</span>
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "input100", @placeholder = "Email..." } })
+                        <span class="focus-input100"> @Html.ValidationMessageFor(model => model.Email)</span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Usuário é obrigatório">
+                        <span class="label-input100">Usuário</span>
+                        @Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "input100", @placeholder = "Usuário..." } })
+                        <span class="focus-input100"> @Html.ValidationMessageFor(model => model.Login)</span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Usuário é obrigatório">
+                        <span class="label-input100">Telefone</span>
+                        @Html.EditorFor(model => model.Telefone, new { htmlAttributes = new { @class = "input100", @placeholder = "Telefone..." } })
+                        <span class="focus-input100"> @Html.ValidationMessageFor(model => model.Telefone)</span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Senha é obrigatória">
+                        <span class="label-input100">Senha</span>
+                        @Html.EditorFor(model => model.Senha, new { htmlAttributes = new { @class = "input100", @placeholder = "*************", @type = "password" } })
+                        <span class="focus-input100"> @Html.ValidationMessageFor(model => model.Senha)</span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Confirmação senha é obrigatória">
+                        <span class="label-input100">Confirmar Senha</span>
+                        @Html.EditorFor(model => model.ConfirmarSenha, new { htmlAttributes = new { @class = "input100", @placeholder = "*************", @type = "password" } })
+                        <span class="focus-input100"> @Html.ValidationMessageFor(model => model.ConfirmarSenha)</span>
+                    </div>
+
+                    @*<%--   <div class="flex-m w-full p-b-33">
+                            <div class="contact100-form-checkbox">
+                                <label class="label-checkbox100" for="ckb1">
+                                    <span class="txt1">
+                                        Eu concordo com os
+                                        <a href="#" class="txt2 hov1">
+                                            termos de uso
+                                        </a>
+                                    </span>
+                                </label>
+                            </div>
+
+
+                        </div>--%>*@
+
+                    <div class="container-login100-form-btn">
+                        <div class="wrap-login100-form-btn">
+                            <div class="login100-form-bgbtn"></div>
+                            <input class="login100-form-btn" type="submit" style="background:transparent" value="Cadastrar" />
+                        </div>
+
+                        <a href="#" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
+                            Sign in
+                            <i class="fa fa-long-arrow-right m-l-5"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!--===============================================================================================-->
+    <script src="@Url.Content("~/cssCadastro/vendor/jquery/jquery-3.2.1.min.js")"></script>
+    <script src="@Url.Content("~/cssCadastro/vendor/animsition/js/animsition.min.js")"></script>
+    <script src="@Url.Content("~/cssCadastro/vendor/bootstrap/js/popper.js")"></script>
+    <script src="@Url.Content("~/cssCadastro/vendor/bootstrap/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/cssCadastro/vendor/select2/select2.min.js")"></script>
+    <script src="@Url.Content("~/cssCadastro/vendor/daterangepicker/moment.min.js")"></script>
+    <script src="@Url.Content("~/cssCadastro/vendor/daterangepicker/daterangepicker.js")"></script>
+    <script src="@Url.Content("~/cssCadastro/vendor/countdowntime/countdowntime.js")"></script>
+    <script src="@Url.Content("~/cssCadastro/js/main.js")"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    @*<script type="text/javascript">
+            function showMessage(message) {
+                    toastr.optionsOverride = 'positionclass:toast-top-full-width';
+                    toastr[message.type](message.content, message.title);
+                }
+
+            $(function () {
+                $(document).ready(function () {
+                    $('.toast').toast('show');
+                });
+                    @*var systemMessage = @Html.Raw(TempData[AmgSistemas.ControleFinanceiro.Controllers.Shared.BaseController.SystemMessage]);
+
+                    if (systemMessage != 'undefined' && systemMessage != null) {
+
+                        showMessage(systemMessage);
+
+                        $('#aShowMessage').click(function () { showMessage(systemMessage) });
+                    }
+
+                });
+        </script>*@
+</body>
+</html>
